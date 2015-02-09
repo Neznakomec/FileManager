@@ -1,0 +1,11 @@
+Keyboard layout
+ 
+Key Action
+ 
+F2 Choose crive
+F3 View file
+F4 Edit file
+F5 Copy files
+F6 Rename or move files
+F7 Create directory
+F8 Delete files directly

@@ -1,0 +1,135 @@
+root = new File("C:/");
+
+	/*	tree1.addTreeSelectionListener(new TreeSelectionListener() {
+
+			public void openFile(String pathString) {
+				Desktop desktop = null;
+				if (Desktop.isDesktopSupported()) {
+					desktop = Desktop.getDesktop();
+				}
+
+				try {
+					desktop.open(new File(pathString));
+				} catch (IOException ioe) {
+					System.out.println("Can't open "
+							+ getFileExtension(pathString) + " type of files");
+				}
+
+			}
+
+			public String getFileExtension(String pathString) {
+				String delims = "[.]";
+				if (!pathString.contains(".")) {
+					return pathString;
+				} else {
+					String[] tokens = pathString.split(delims);
+					return "*." + tokens[tokens.length - 1];
+				}
+			}
+
+			@Override
+			public void valueChanged(TreeSelectionEvent currPath) {
+				// TODO Auto-generated method stub
+				TreePath path = currPath.getPath();
+				String pathString = getTreePath(path, ";");
+				// field.setText(pathString);
+				// pathString = "C:/Images/Image5.jpg";
+
+				openFile(pathString);
+			}
+
+			public String getTreePath(TreePath treePath, String separator) {
+
+				StringBuffer treePathStrBuff = new StringBuffer();
+				String treePathStr = null;
+				Object[] objs = treePath.getPath();
+				if (objs != null) {
+					// don't include the first path 'cos its root
+					for (int i = objs.length - 1; i < objs.length - 1; i++) {
+						treePathStrBuff.append(objs[i].toString());
+						treePathStrBuff.append(separator);
+					}
+					treePathStrBuff.append(objs[objs.length - 1].toString());
+					treePathStr = treePathStrBuff.toString();
+				}
+
+				return treePathStr;
+			}
+
+		});
+*/
+
+
+tree1.addKeyListener(new KeyListener() {
+
+			public String getTreePath(TreePath treePath, String separator) {
+
+				StringBuffer treePathStrBuff = new StringBuffer();
+				String treePathStr = null;
+				Object[] objs = treePath.getPath();
+				if (objs != null) {
+					// don't include the first path 'cos its root
+					for (int i = objs.length - 1; i < objs.length - 1; i++) {
+						treePathStrBuff.append(objs[i].toString());
+						treePathStrBuff.append(separator);
+					}
+					treePathStrBuff.append(objs[objs.length - 1].toString());
+					treePathStr = treePathStrBuff.toString();
+				}
+
+				return treePathStr;
+			}
+
+			int copyFiles(TreePath[] fromPath, String toPath) {
+				for (int i = 0; i < fromPath.length; i++) {
+					String str = new String(getTreePath(fromPath[i], ";"));
+					File temp = new File(str);
+					// temp.i
+				}
+				return 1;
+			}
+
+			int openFile(TreePath selected) {
+				File temp = new File(getTreePath(selected, ";"));
+				if (temp.isFile()) {// /
+
+					Desktop desktop = null;
+					if (Desktop.isDesktopSupported()) {
+						desktop = Desktop.getDesktop();
+					}
+
+					try {
+						desktop.open(temp);
+						return 1;
+					} catch (IOException ioe) {
+						System.out.println("Can't open this type of files");
+						return 0;
+					}
+				}
+				return 0;
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent key) {
+				// TODO Auto-generated method stub
+				if (key.getKeyCode() == KeyEvent.VK_F5)
+					copyFiles(tree1.getSelectionPaths(), "C:/");
+				if (key.getKeyCode() == KeyEvent.VK_F3)
+					openFile(tree1.getSelectionPath());
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent key) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyTyped(KeyEvent key) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
